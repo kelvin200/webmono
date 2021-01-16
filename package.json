@@ -8,11 +8,17 @@
     "build:react": "cd react && webpack --mode production",
     "build": "npm run build:preact && npm run build:react",
     "clean": "rimraf ./dist",
-    "start": "start-storybook -p 9009 -s dist"
+    "start": "start-storybook -p 9009 -s dist",
+    "storybook": "start-storybook -p 6006 -s dist",
+    "build-storybook": "build-storybook"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "^6.1.14",
+    "@storybook/addon-essentials": "^6.1.14",
+    "@storybook/addon-links": "^6.1.14",
     "@storybook/react": "^6.1.14",
     "@types/aws-lambda": "^8.10.70",
     "@types/jest": "^26.0.20",
@@ -23,6 +29,7 @@
     "@types/react-transition-group": "^4.4.0",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
+    "babel-loader": "^8.2.2",
     "base64-inline-loader": "^1.1.1",
     "eslint": "^7.17.0",
     "eslint-config-airbnb": "^18.2.1",
