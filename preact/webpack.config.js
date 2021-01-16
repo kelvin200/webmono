@@ -1,13 +1,15 @@
+const path = require('path')
+
 module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
   entry: {
     text: './src/components/text.tsx',
-    textmfe: './src/mfe/text.tsx',
   },
   output: {
-    filename: '[name].js',
+    filename: 'preact-[name].js',
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [

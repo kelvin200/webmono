@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "target": "esnext",
     "module": "commonjs",
     "lib": ["ESNext", "DOM"],
     "allowJs": true,
-    "rootDir": "./",
+    "rootDir": "../",
     "baseUrl": "./",
     "outDir": "./dist",
     "removeComments": true,
@@ -17,8 +18,8 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["../node_modules/@types"]
   },
-  "include": ["./src", "./stories", "./.storybook/*.*", "./types.d.ts"],
+  "include": ["./src", "./stories", "./.storybook/*.*"],
   "exclude": ["./dist", "./webpack.config.js"]
 }

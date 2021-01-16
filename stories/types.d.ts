@@ -2,5 +2,6 @@
 declare namespace JSX {
   interface IntrinsicElements {
     'webmono-text': any
+    'x-greeting': any
   }
 }
