@@ -9,7 +9,7 @@ export class TextMFE extends TemplateMFE {
   @property({ attribute: false }) hello = ''
 
   render() {
-    ReactDOM.render(<MFE component={Text} componentProps={{}} />, this.container)
+    ReactDOM.render(<MFE component={Text} componentProps={{ name: this.hello }} />, this.container)
 
     return html`${this.container}`
   }
