@@ -5,5 +5,6 @@ declare namespace JSX {
     'x-greeting': any
     'x-greeting-2': any
     'x-greeting-3': any
+    'x-greeting-4': any
   }
 }

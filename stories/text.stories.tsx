@@ -8,5 +8,6 @@ export const textDefault = () => (
     <x-greeting />
     <x-greeting-2 />
     <x-greeting-3 />
+    <x-greeting-4 />
   </div>
 )
