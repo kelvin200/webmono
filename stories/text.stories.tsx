@@ -1,13 +1,11 @@
 import React from 'react'
 
-export default { title: 'Text' }
+export default { title: 'Showcase' }
 
-export const textDefault = () => (
+export const showcase = () => (
   <div>
-    <webmono-text />
-    <x-greeting />
-    <x-greeting-2 />
-    <x-greeting-3 />
-    <x-greeting-4 />
+    <h2>Preact sample with CSS</h2>
+    <preact-sample-css />
+    <preact-sample-css color="orange" name="Prop changed" />
   </div>
 )

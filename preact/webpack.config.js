@@ -11,9 +11,6 @@ module.exports = {
   },
   entry: {
     text: './src/components/text.tsx',
-    text2: './src/components/text2.tsx',
-    text3: './src/components/text3.tsx',
-    text4: './src/components/text4.tsx',
   },
   output: {
     filename: 'preact-[name].js',
