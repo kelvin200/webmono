@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  // mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -8,9 +9,11 @@ module.exports = {
       'react-dom/test-utils': 'preact/test-utils',
       'react-dom': 'preact/compat',
     },
+    modules: [path.resolve(__dirname, '../node_modules')],
   },
   entry: {
-    text: './src/components/text.tsx',
+    text: './src/webc/text.webc.tsx',
+    bundle: './index.ts',
   },
   output: {
     filename: 'preact-[name].js',

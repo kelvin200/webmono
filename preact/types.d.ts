@@ -1,4 +1,6 @@
-declare module '*.scss' {
-  const content: Record<string, any>
-  export default content
+/* eslint-disable no-unused-vars */
+declare namespace JSX {
+  interface IntrinsicElements {
+    'preact-sample-css': any
+  }
 }

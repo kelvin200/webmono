@@ -1,8 +1,5 @@
-import { css, keyframes, setup } from 'goober'
-import { h } from 'preact'
-import register from 'preact-custom-element'
-
-setup(h)
+import { css, keyframes } from 'goober'
+import { useCallback, useState } from 'preact/hooks'
 
 const rotate = keyframes`
   from, to {
@@ -35,15 +32,18 @@ const useStyles = ({ color = 'black' }: Props) => ({
   }),
 })
 
-const Sample = ({ color, name = 'Default value' }: Props) => {
+export const Sample = ({ color, name = 'Default value' }: Props) => {
   const classes = useStyles({ color })
+  const [value, setValue] = useState(0)
+  const onClick = useCallback(() => {
+    setValue(x => x + 1)
+  }, [])
   return (
     <div>
       <p className={classes.normal}>Normal</p>
       <p className={classes.normalProp}>{`With props: ${name}`}</p>
-      <p className={classes.animated}>Animated</p>
+      <p className={classes.animated}>{value}</p>
+      <button onClick={onClick}>Click me</button>
     </div>
   )
 }
-
-register(Sample, 'preact-sample-css', ['color'])
