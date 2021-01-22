@@ -37,13 +37,7 @@ app.get('/', (req, res) => {
       <App />
     </Router>,
   )
-  // const style = extractCss()
-  // send it back wrapped up as an HTML5 document:
-  // TODO: Should I send css separately
-  // TODO: Should I send JS separately
   // TODO: SEO for html content
-  // res.send(`<!DOCTYPE html><html><head><style>${style}</style></head><body>${html}</body></html>`)
-
   if (!blah) {
     return res.status(500).send('Oops, better luck next time!')
   }

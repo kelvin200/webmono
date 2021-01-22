@@ -12,11 +12,7 @@ module.exports = {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
   entry: {
-    vendors: ['preact', 'goober', 'wouter-preact'],
-    bundle: {
-      import: './index.tsx',
-      dependOn: 'vendors',
-    },
+    text: './src/webc/text.webc.tsx',
   },
   output: {
     filename: 'preact-[name].js',
