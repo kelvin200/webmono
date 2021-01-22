@@ -2,6 +2,8 @@ import express from 'express'
 import fs from 'fs'
 import path from 'path'
 import render from 'preact-render-to-string'
+import { Router } from 'wouter-preact'
+import staticLocationHook from 'wouter-preact/static-location'
 import { App } from './src/app'
 
 // basic HTTP server via express:
@@ -30,7 +32,11 @@ const PORT = 8080
 
 // on each request, render and return a component:
 app.get('/', (req, res) => {
-  const html = render(App())
+  const html = render(
+    <Router hook={staticLocationHook(req.path)}>
+      <App />
+    </Router>,
+  )
   // const style = extractCss()
   // send it back wrapped up as an HTML5 document:
   // TODO: Should I send css separately

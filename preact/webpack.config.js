@@ -13,7 +13,7 @@ module.exports = {
   },
   entry: {
     text: './src/webc/text.webc.tsx',
-    bundle: './index.ts',
+    bundle: './index.tsx',
   },
   output: {
     filename: 'preact-[name].js',

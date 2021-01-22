@@ -84,6 +84,7 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "redux": "^4.0.5",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "wouter-preact": "^2.7.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "ts-node-dev ./server.ts",
+    "start": "ts-node-dev ./server.tsx",
     "build": "webpack --mode production",
     "clean": "rimraf ./dist",
     "storybook": "start-storybook -p 6006 -s dist",
