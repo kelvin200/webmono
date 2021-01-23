@@ -1,4 +1,5 @@
 const path = require('path')
+// const webpack = require('webpack')
 
 module.exports = {
   // mode: 'development',
@@ -11,7 +12,15 @@ module.exports = {
     },
     modules: [path.resolve(__dirname, '../node_modules')],
   },
+  // devtool: 'inline-source-map',
+  // devtool: false,
+  // plugins: [new webpack.SourceMapDevToolPlugin({})],
   entry: {
+    text: './src/webc/text.webc.tsx',
+    text_s: {
+      import: './src/webc/text.webc.tsx',
+      dependOn: 'vendors',
+    },
     vendors: ['preact', 'goober', 'wouter-preact'],
     bundle: {
       import: './index.tsx',
