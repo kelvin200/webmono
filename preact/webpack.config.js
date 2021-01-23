@@ -21,7 +21,7 @@ module.exports = {
       import: './src/webc/text.webc.tsx',
       dependOn: 'vendors',
     },
-    vendors: ['preact', 'goober', 'wouter-preact'],
+    vendors: ['preact', 'goober', 'wouter-preact', 'preact-custom-element'],
     bundle: {
       import: './index.tsx',
       dependOn: 'vendors',
