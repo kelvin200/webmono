@@ -1,6 +1,7 @@
 import { setup } from 'goober'
 import { h } from 'preact'
 import { Link, LinkProps, Redirect, Route, Switch, useRoute } from 'wouter-preact'
+import { Page } from './components'
 
 setup(h)
 
@@ -27,7 +28,9 @@ export const App = () => (
         <Route path="/info">
           <Redirect to="/about" />
         </Route>
-        <Route path="/">Wouter + Preact = ♡</Route>
+        <Route path="/">
+          <Page />
+        </Route>
         <Route path="/about">
           <article>
             <h1>Wouter API</h1>

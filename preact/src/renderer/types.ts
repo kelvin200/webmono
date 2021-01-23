@@ -12,7 +12,8 @@ export interface MarkdownProps {
 }
 export interface WebcProps {
   type: 'WEBC'
-  name: string[]
+  name: string
+  url: string
 }
 export interface ListProps {
   type: 'LIST'

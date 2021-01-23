@@ -6,7 +6,7 @@ import { NodeNav } from './nav'
 import { NodeProps } from './types'
 import { NodeWebc } from './webc'
 
-export const Node = (props: NodeProps) => {
+export const RenderNode = (props: NodeProps) => {
   switch (props.type) {
     case 'GRID':
       return <NodeGrid {...props} />
@@ -24,7 +24,7 @@ export const Node = (props: NodeProps) => {
       return (
         <>
           {props.childNodes.map(n => (
-            <Node {...n} />
+            <RenderNode {...n} />
           ))}
         </>
       )

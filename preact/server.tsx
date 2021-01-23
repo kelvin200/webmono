@@ -51,4 +51,4 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
 
-// app.use(express.static('./build'))
+app.use(express.static('./public/assets'))
