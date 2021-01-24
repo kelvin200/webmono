@@ -6,8 +6,9 @@
   "scripts": {
     "start:preact": "cd preact && npm run start",
     "build:preact": "cd preact && webpack --mode production",
+    "build:webc": "cd webcomponents && webpack --mode production",
     "build:react": "cd react && webpack --mode production",
-    "build": "npm run build:preact && npm run build:react",
+    "build": "webpack --mode production",
     "clean": "rimraf ./dist",
     "start": "start-storybook -p 9009 -s dist",
     "storybook": "start-storybook -p 6006 -s dist",
