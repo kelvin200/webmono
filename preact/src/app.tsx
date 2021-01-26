@@ -1,7 +1,10 @@
 import { setup } from 'goober'
+import { nanoid } from 'nanoid'
 import { h } from 'preact'
+import { useReducer } from 'preact/hooks'
 import { Link, LinkProps, Redirect, Route, Switch, useRoute } from 'wouter-preact'
 import { Page, Page2 } from './components'
+import { DEFAULT_STATE, RootReducer, StoreContext } from './store'
 
 setup(h)
 
@@ -14,32 +17,46 @@ const ActiveLink = (props: LinkProps) => {
   )
 }
 
-export const App = () => (
-  <div className="App">
-    <nav>
-      <ActiveLink href="/">Home</ActiveLink>
-      <ActiveLink href="/about">What is Wouter</ActiveLink>
-      <ActiveLink href="/faq">FAQ</ActiveLink>
-      <ActiveLink href="/info">More Info (redirect)</ActiveLink>
-    </nav>
+const SCRIPTS_ID = nanoid(5)
 
-    <main>
-      <Switch>
-        <Route path="/info">
-          <Redirect to="/about" />
-        </Route>
-        <Route path="/">
-          <Page />
-        </Route>
-        <Route path="/about">
-          <Page2 />
-        </Route>
-        <Route path="/:anything*">
-          <div>
-            <b>404:</b> Sorry, this page isn't ready yet!
-          </div>
-        </Route>
-      </Switch>
-    </main>
-  </div>
-)
+export const App = () => {
+  const [state, dispatch] = useReducer(RootReducer, DEFAULT_STATE)
+  const store = { state, dispatch }
+
+  return (
+    <StoreContext.Provider value={store}>
+      <div className="App">
+        <div id={SCRIPTS_ID}>
+          {state.urls.map(u => (
+            <script key={u} src={u} type="text/javascript" />
+          ))}
+        </div>
+        <nav>
+          <ActiveLink href="/">Home</ActiveLink>
+          <ActiveLink href="/about">What is Wouter</ActiveLink>
+          <ActiveLink href="/faq">FAQ</ActiveLink>
+          <ActiveLink href="/info">More Info (redirect)</ActiveLink>
+        </nav>
+
+        <main>
+          <Switch>
+            <Route path="/info">
+              <Redirect to="/about" />
+            </Route>
+            <Route path="/">
+              <Page />
+            </Route>
+            <Route path="/about">
+              <Page2 />
+            </Route>
+            <Route path="/:anything*">
+              <div>
+                <b>404:</b> Sorry, this page isn't ready yet!
+              </div>
+            </Route>
+          </Switch>
+        </main>
+      </div>
+    </StoreContext.Provider>
+  )
+}

@@ -16,9 +16,9 @@ const compiler = webpack(config)
 const webpackDevMiddleware = require('webpack-dev-middleware')
 
 const indexFile = path.resolve(__dirname, './public/index.html')
-let blah = ''
+let htmlTemplate = ''
 try {
-  blah = fs.readFileSync(indexFile, 'utf8')
+  htmlTemplate = fs.readFileSync(indexFile, 'utf8')
 } catch (err) {
   console.error('Something went wrong:', err)
 }
@@ -38,11 +38,11 @@ app.get('/', (req, res) => {
     </Router>,
   )
   // TODO: SEO for html content
-  if (!blah) {
+  if (!htmlTemplate) {
     return res.status(500).send('Oops, better luck next time!')
   }
 
-  return res.send(blah.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
+  return res.send(htmlTemplate.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
 })
 
 // app.use(express.static(path.resolve(__dirname, './dist')))
