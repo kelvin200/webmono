@@ -3,5 +3,6 @@ declare namespace JSX {
   interface IntrinsicElements {
     'webmono-text': any
     'preact-sample-css': any
+    'preact-parallax': any
   }
 }
