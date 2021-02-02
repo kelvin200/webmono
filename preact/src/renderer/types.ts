@@ -18,6 +18,7 @@ export interface WebcProps {
 export interface ListProps {
   type: 'LIST'
   childNodes: NodeProps[]
+  direction?: string
 }
 export interface NavProps {
   type: 'NAV'

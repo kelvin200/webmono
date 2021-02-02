@@ -5,7 +5,7 @@ import { LayersProps } from './types'
 
 const useStyles = () => ({
   container: css({ position: 'relative' }),
-  layer: css({ position: 'absolute' }),
+  item: css({ position: 'absolute' }),
 })
 
 export const NodeLayers = ({ childNodes }: LayersProps) => {
@@ -24,7 +24,7 @@ export const NodeLayers = ({ childNodes }: LayersProps) => {
     <div className={classes.container}>
       {childNodes.map((node, i) => (
         <div
-          className={classes.layer}
+          className={classes.item}
           style={{
             transform: `translateY(${(offset * i) / 2}px)`,
           }}
