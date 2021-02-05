@@ -1,4 +1,5 @@
 import { css, keyframes } from 'goober'
+import register from 'preact-custom-element'
 import { useCallback, useState } from 'preact/hooks'
 
 const rotate = keyframes`
@@ -47,3 +48,5 @@ export const Sample = ({ color, name = 'Default value' }: Props) => {
     </div>
   )
 }
+
+register(Sample, 'preact-sample-css', ['color'])

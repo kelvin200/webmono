@@ -1,3 +1,4 @@
 import { MarkdownProps } from './types'
 
-export const NodeMarkdown = (props: MarkdownProps) => <div>Markdown</div>
+export const NodeMarkdown = ({ content }: MarkdownProps) => <div>abc</div>
+// <MyMarkdown>{content as any}</MyMarkdown>

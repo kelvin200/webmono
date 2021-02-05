@@ -21,6 +21,6 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["../node_modules/@types"]
   },
-  "include": ["./src", "./stories", "./.storybook/*.*", "./types.d.ts"],
+  "include": ["./src", "./stories", "./.storybook/*.*"],
   "exclude": ["./dist", "./webpack.config.js"]
 }

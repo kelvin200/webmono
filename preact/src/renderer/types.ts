@@ -8,7 +8,7 @@ export interface LayersProps {
 }
 export interface MarkdownProps {
   type: 'MD'
-  childNodes: NodeProps[]
+  content: string
 }
 export interface WebcProps {
   type: 'WEBC'
