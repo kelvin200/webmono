@@ -3,15 +3,25 @@ import { RenderNode } from '../renderer/node'
 
 const nodeconfig: NodeProps = {
   childNodes: [
-    {
-      type: 'WEBC',
-      name: 'preact-sample-css',
-      url: '/keyweb-text.js',
-    },
+    // {
+    //   type: 'WEBC',
+    //   name: 'preact-sample-css',
+    //   url: '/keyweb-text.js',
+    // },
     {
       type: 'WEBC',
       name: 'keyweb-redux-hooks',
       url: '/keyweb-redux-hooks.js',
+    },
+    {
+      type: 'WEBC',
+      name: 'keyweb-redux-rxjs',
+      url: '/keyweb-redux-rxjs.js',
+    },
+    {
+      type: 'WEBC',
+      name: 'keyweb-reactive-rxjs',
+      url: '/keyweb-reactive-rxjs.js',
     },
     // {
     //   type: 'WEBC',

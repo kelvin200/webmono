@@ -40,7 +40,7 @@ interface State {
   value: number
 }
 
-export interface Action {
+interface Action {
   type: string
   diff: number
 }

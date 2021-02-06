@@ -20,6 +20,9 @@ module.exports = {
     text: './src/webc/text.tsx',
     // markdown: './src/webc/markdown.tsx',
     'redux-hooks': './src/webc/redux-hooks.tsx',
+    // 'redux-kefir': './src/webc/redux-kefir.tsx',
+    'redux-rxjs': './src/webc/redux-rxjs.tsx',
+    'reactive-rxjs': './src/webc/reactive-rxjs.tsx',
     // text_s: {
     //   import: './src/webc/text.webc.tsx',
     //   dependOn: 'vendors',
