@@ -2,52 +2,75 @@ import { Emitter, Event, fromEvents, Stream, stream } from 'kefir'
 import register from 'preact-custom-element'
 import { useEffect, useRef, useState } from 'preact/hooks'
 
-class BehaviorSubject<T, S> {
+interface State {
+  value: number
+}
+
+interface Action {
+  type: string
+  diff: number
+}
+
+class Subject<T, S = unknown> {
   private emitter?: Emitter<T, S>
-  private value?: T
 
   stream: Stream<T, S>
 
-  constructor(initValue: T) {
+  constructor() {
     this.stream = stream<T, S>(_emitter => {
       this.emitter = _emitter
       return () => {
         this.emitter = undefined
       }
-    }).onValue(v => {
-      this.value = v
     })
-    this.emitter?.emit(initValue)
   }
 
-  emit(x: T): BehaviorSubject<T, S> {
+  emit(x: T): Subject<T, S> {
     this.emitter?.emit(x)
     return this
   }
 
-  error(x: S): BehaviorSubject<T, S> {
+  error(x: S): Subject<T, S> {
     this.emitter?.error(x)
     return this
   }
 
-  end(): BehaviorSubject<T, S> {
+  end(): Subject<T, S> {
     this.emitter?.end()
     return this
   }
 
-  emitEvent(x: Event<T, S>): BehaviorSubject<T, S> {
+  emitEvent(x: Event<T, S>): Subject<T, S> {
     this.emitter?.emitEvent(x)
     return this
   }
+}
 
-  getValue(): T {
-    return this.value!
+const action$ = new Subject<Action>()
+const DEFAULT_STATE: State = { value: 0 }
+
+const reducer = (state: State = DEFAULT_STATE, action: Action) => {
+  switch (action.type) {
+    case 'UPDATE_VALUE': {
+      const { diff } = action
+
+      return {
+        value: state.value + diff,
+      }
+    }
+    default:
+      return state
   }
 }
 
-const value$ = new BehaviorSubject(0)
+const store$ = action$.stream.scan(reducer, DEFAULT_STATE)
 
-const updateValue = (diff: number) => value$.emit(value$.getValue() + diff)
+const actionDispatcher = (func: any) => (...args: any) => action$.emit(func(...args))
+
+const updateValue = actionDispatcher((diff: number) => ({
+  diff,
+  type: 'UPDATE_VALUE',
+}))
 
 const App = () => {
   return (
@@ -84,11 +107,11 @@ const Value = () => {
   const [val, setVal] = useState(0)
 
   useEffect(() => {
-    const sub = value$.stream.observe(v => setVal(v))
+    const sub = store$.observe(v => setVal(v.value))
     return sub.unsubscribe
   }, [])
 
   return <span>{`Value: ${val}`}</span>
 }
 
-register(App, 'keyweb-reactive-kefir')
+register(App, 'keyweb-redux-kefir')
