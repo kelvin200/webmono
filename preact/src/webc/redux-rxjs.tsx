@@ -1,6 +1,6 @@
 import register from 'preact-custom-element'
 import { useEffect, useRef, useState } from 'preact/hooks'
-import { EMPTY, fromEvent, MonoTypeOperatorFunction, of, Subject } from 'rxjs'
+import { EMPTY, fromEvent, OperatorFunction, Subject } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 import {
   catchError,
@@ -8,7 +8,6 @@ import {
   filter,
   ignoreElements,
   map,
-  mapTo,
   mergeMap,
   pluck,
   scan,
@@ -74,8 +73,8 @@ const updateValue = actionDispatcher((diff: number) => ({
   type: 'UPDATE_VALUE',
 }))
 
-const fetchUser$: MonoTypeOperatorFunction<string> = mergeMap(u =>
-  of(u).pipe(
+const fetchUser$: OperatorFunction<string, never> = i$ =>
+  i$.pipe(
     debounceTime(1000),
     filter(Boolean),
     map(u => `https://api.github.com/users/${u}`),
@@ -90,9 +89,7 @@ const fetchUser$: MonoTypeOperatorFunction<string> = mergeMap(u =>
         ignoreElements(),
       ),
     ),
-    mapTo(u),
-  ),
-)
+  )
 
 const App = () => {
   const refInput = useRef<HTMLInputElement>()
