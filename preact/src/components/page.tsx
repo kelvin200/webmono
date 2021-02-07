@@ -23,16 +23,26 @@ const nodeconfig: NodeProps = {
       name: 'keyweb-reactive-rxjs',
       url: '/keyweb-reactive-rxjs.js',
     },
-    {
-      type: 'WEBC',
-      name: 'keyweb-reactive-kefir',
-      url: '/keyweb-reactive-kefir.js',
-    },
-    {
-      type: 'WEBC',
-      name: 'keyweb-redux-kefir',
-      url: '/keyweb-redux-kefir.js',
-    },
+    // {
+    //   type: 'WEBC',
+    //   name: 'keyweb-reactive-kefir',
+    //   url: '/keyweb-reactive-kefir.js',
+    // },
+    // {
+    //   type: 'WEBC',
+    //   name: 'keyweb-redux-kefir',
+    //   url: '/keyweb-redux-kefir.js',
+    // },
+    // {
+    //   type: 'WEBC',
+    //   name: 'keyweb-rxcomp-rxjs',
+    //   url: '/keyweb-rxcomp-rxjs.js',
+    // },
+    // {
+    //   type: 'WEBC',
+    //   name: 'keyweb-rxcomp-kefir',
+    //   url: '/keyweb-rxcomp-kefir.js',
+    // },
     // {
     //   type: 'WEBC',
     //   name: 'preact-sample-css',

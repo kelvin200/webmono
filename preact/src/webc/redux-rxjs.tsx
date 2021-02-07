@@ -1,31 +1,63 @@
 import register from 'preact-custom-element'
 import { useEffect, useRef, useState } from 'preact/hooks'
-import { fromEvent, Subject } from 'rxjs'
-import { scan } from 'rxjs/operators'
+import { EMPTY, fromEvent, MonoTypeOperatorFunction, of, Subject } from 'rxjs'
+import { ajax } from 'rxjs/ajax'
+import {
+  catchError,
+  debounceTime,
+  filter,
+  ignoreElements,
+  map,
+  mapTo,
+  mergeMap,
+  pluck,
+  scan,
+  tap,
+} from 'rxjs/operators'
+
+interface User {
+  name: string
+}
 
 interface State {
   value: number
+  user?: User
+  userError?: Error
 }
 
 interface Action {
   type: string
-  diff: number
+  [key: string]: any
 }
 
-// create our stream as a subject so arbitrary data can be sent on the stream
 const action$ = new Subject<Action>()
 
-// Initial State
 const DEFAULT_STATE: State = { value: 0 }
 
-// Redux reducer
-const reducer = (state: State = DEFAULT_STATE, action: Action) => {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'UPDATE_VALUE': {
       const { diff } = action
 
       return {
+        ...state,
         value: state.value + diff,
+      }
+    }
+    case 'USER_FETCHED': {
+      const { user } = action
+
+      return {
+        ...state,
+        user,
+      }
+    }
+    case 'USER_ERROR': {
+      const { error } = action
+
+      return {
+        ...state,
+        userError: error,
       }
     }
     default:
@@ -33,22 +65,52 @@ const reducer = (state: State = DEFAULT_STATE, action: Action) => {
   }
 }
 
-// Reduxification
 const store$ = action$.pipe(scan(reducer, DEFAULT_STATE))
 
-// Higher order function to send actions to the stream
 const actionDispatcher = (func: any) => (...args: any) => action$.next(func(...args))
 
-// Example action function
 const updateValue = actionDispatcher((diff: number) => ({
   diff,
   type: 'UPDATE_VALUE',
 }))
 
-// React view component
+const fetchUser$: MonoTypeOperatorFunction<string> = mergeMap(u =>
+  of(u).pipe(
+    debounceTime(1000),
+    filter(Boolean),
+    map(u => `https://api.github.com/users/${u}`),
+    mergeMap(url =>
+      ajax(url).pipe(
+        pluck('response'),
+        tap(user => action$.next({ type: 'USER_FETCHED', user })),
+        catchError(error => {
+          action$.next({ type: 'USER_ERROR', error })
+          return EMPTY
+        }),
+        ignoreElements(),
+      ),
+    ),
+    mapTo(u),
+  ),
+)
+
 const App = () => {
+  const refInput = useRef<HTMLInputElement>()
+
+  useEffect(() => {
+    const sub = fromEvent<{ target: HTMLInputElement }>(refInput.current, 'keyup')
+      .pipe(
+        map(e => e.target.value),
+        fetchUser$,
+      )
+      .subscribe()
+    return sub.unsubscribe
+  }, [refInput])
+
   return (
     <div>
+      <input ref={refInput} placeholder="GitHub username" />
+      <Us />
       <Controller />
       <Value />
     </div>
@@ -86,6 +148,21 @@ const Value = () => {
   }, [])
 
   return <span>{`Value: ${val}`}</span>
+}
+
+const Us = () => {
+  const [val, setVal] = useState<User | undefined>(undefined)
+
+  useEffect(() => {
+    const sub = store$.subscribe(v => setVal(v.user))
+    return sub.unsubscribe
+  }, [])
+
+  return (
+    <div>
+      <pre>{JSON.stringify(val, null, 2)}</pre>
+    </div>
+  )
 }
 
 register(App, 'keyweb-redux-rxjs')

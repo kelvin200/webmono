@@ -17,13 +17,13 @@ module.exports = {
   // devtool: false,
   // plugins: [new webpack.SourceMapDevToolPlugin({})],
   entry: {
-    text: './src/webc/text.tsx',
+    // text: './src/webc/text.tsx',
     // markdown: './src/webc/markdown.tsx',
     'redux-hooks': './src/webc/redux-hooks.tsx',
-    'reactive-kefir': './src/webc/reactive-kefir.tsx',
     'redux-rxjs': './src/webc/redux-rxjs.tsx',
-    'redux-kefir': './src/webc/redux-kefir.tsx',
     'reactive-rxjs': './src/webc/reactive-rxjs.tsx',
+    // 'reactive-kefir': './src/webc/reactive-kefir.tsx',
+    // 'redux-kefir': './src/webc/redux-kefir.tsx',
     // text_s: {
     //   import: './src/webc/text.webc.tsx',
     //   dependOn: 'vendors',
