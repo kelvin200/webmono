@@ -13,6 +13,9 @@ module.exports = {
     },
     modules: [path.resolve(__dirname, '../node_modules')],
   },
+  resolveLoader: {
+    modules: [path.resolve(__dirname, '../node_modules')],
+  },
   // devtool: 'inline-source-map',
   // devtool: false,
   // plugins: [new webpack.SourceMapDevToolPlugin({})],

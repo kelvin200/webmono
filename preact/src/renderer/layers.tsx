@@ -1,7 +1,20 @@
 import { css } from 'goober'
 import { useEffect, useState } from 'preact/hooks'
-import { RenderNode } from './node'
 import { LayersProps } from './types'
+
+type MovementDirection = 'U' | 'D' | 'L' | 'R' | 'I' | 'O'
+type DOMEvents = 'N' | 'C' | 'S'
+interface MovementConfig {
+  direction: MovementDirection
+  speed?: number // Default: 1rem/s
+  trigger?: DOMEvents // Default: N
+}
+interface OpacityConfig {}
+
+interface LayerConfig {
+  movements?: MovementConfig[]
+  opacity?: number | OpacityConfig
+}
 
 const useStyles = () => ({
   container: css({ position: 'relative' }),
