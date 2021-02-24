@@ -4,7 +4,7 @@
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "clean": "rimraf ./dist",
-    "storybook": "start-storybook -p 6006 -s dist",
+    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
   }
 }

@@ -3,6 +3,11 @@ export interface GridProps {
   childNodes: NodeProps[]
 }
 
+export interface ImageProps {
+  type: 'IMG'
+  url: string
+}
+
 type MovementDirection = 'N' | 'U' | 'D' | 'L' | 'R' | 'I' | 'O'
 type DOMEvents = 'N' | 'C' | 'S'
 interface MovementConfig {
@@ -19,36 +24,42 @@ type LayerConfig = NodeProps & {
   opacity?: number | OpacityConfig
 }
 
-export interface LayersProps {
+export interface LayersProps extends NodeBase {
   type: 'LAYERS'
   childNodes: LayerConfig[]
 }
-export interface MarkdownProps {
+export interface MarkdownProps extends NodeBase {
   type: 'MD'
   content: string
 }
-export interface WebcProps {
+export interface WebcProps extends NodeBase {
   type: 'WEBC'
   name: string
   url: string
 }
-export interface ListProps {
+export interface ListProps extends NodeBase {
   type: 'LIST'
   childNodes: NodeProps[]
   direction?: string
 }
-export interface NavProps {
+export interface NavProps extends NodeBase {
   type: 'NAV'
   childNodes: NodeProps[]
 }
+export interface NodeBase {
+  type: unknown
+  width?: number
+  height?: number
+}
 export type NodeProps =
-  | {
+  | (NodeBase & {
       type?: never
       childNodes: NodeProps[]
-    }
+    })
   | GridProps
   | LayersProps
   | MarkdownProps
   | WebcProps
   | ListProps
   | NavProps
+  | ImageProps

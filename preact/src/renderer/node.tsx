@@ -1,4 +1,5 @@
 import { NodeGrid } from './grid'
+import { NodeImage } from './image'
 import { NodeLayers } from './layers'
 import { NodeList } from './list'
 import { NodeMarkdown } from './markdown'
@@ -20,6 +21,8 @@ export const RenderNode = (props: NodeProps) => {
       return <NodeNav {...props} />
     case 'WEBC':
       return <NodeWebc {...props} />
+    case 'IMG':
+      return <NodeImage {...props} />
     default:
       return (
         <>

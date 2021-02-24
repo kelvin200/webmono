@@ -1,48 +1,56 @@
-import { css } from 'goober'
+import { css, keyframes } from 'goober'
 import { useEffect, useState } from 'preact/hooks'
 import { LayersProps } from './types'
 import { RenderNode } from './node'
 
 const useStyles = () => ({
-  container: css({ position: 'relative' }),
-  item: css({ position: 'absolute' }),
+  container: css({
+    position: 'relative',
+    overflow: 'hidden',
+  }),
+  item: css({
+    position: 'absolute',
+  }),
 })
 
-const example: LayersProps = {
-  type: 'LAYERS',
-  childNodes: [
-    {
-      passiveMovements: [
-        {
-          direction: 'L',
-        },
-      ],
-      type: 'MD',
-      content: '#background',
-    },
-    {
-      passiveMovements: [
-        {
-          direction: 'R',
-        },
-      ],
-      type: 'MD',
-      content: '#foreground',
-    },
-  ],
+const moveit = [
+  keyframes`
+  from, to {
+    transform: translateX(-20%);
+  }
+
+  50% {
+    transform: translateX(-10%);
+  }
+`,
+  keyframes`
+from, to {
+  transform: translateX(0);
 }
 
-export const NodeLayers = ({ childNodes }: LayersProps) => {
+50% {
+  transform: translateX(40%);
+}
+`,
+]
+
+export const NodeLayers = ({ childNodes, width, height }: LayersProps) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.container}>
+    <div
+      className={classes.container}
+      style={{
+        width: width || '100%',
+        height: height || '100%',
+      }}
+    >
       {childNodes.map(({ passiveMovements, ...node }, i) => (
         <div
           className={classes.item}
           style={{
-            transform: `translateX(200px)`,
-            animationDuration: 5000,
+            animation: `${moveit[i]} 30s linear infinite`,
+            bottom: 0,
           }}
         >
           <RenderNode {...node} />
