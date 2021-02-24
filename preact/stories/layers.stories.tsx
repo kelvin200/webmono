@@ -5,8 +5,10 @@ export default { title: 'Layers' }
 export const layersDefault = () => (
   <NodeLayers
     type="LAYERS"
-    width={960}
-    height={540}
+    style={{
+      width: 960,
+      height: 540,
+    }}
     childNodes={[
       {
         passiveMovements: [

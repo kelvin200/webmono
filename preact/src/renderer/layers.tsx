@@ -34,17 +34,11 @@ from, to {
 `,
 ]
 
-export const NodeLayers = ({ childNodes, width, height }: LayersProps) => {
+export const NodeLayers = ({ childNodes, style }: LayersProps) => {
   const classes = useStyles()
 
   return (
-    <div
-      className={classes.container}
-      style={{
-        width: width || '100%',
-        height: height || '100%',
-      }}
-    >
+    <div className={classes.container} style={style}>
       {childNodes.map(({ passiveMovements, ...node }, i) => (
         <div
           className={classes.item}

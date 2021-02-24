@@ -51,8 +51,6 @@ export interface NavProps extends NodeBase {
 }
 export interface NodeBase {
   type: unknown
-  width?: number
-  height?: number
   style?: JSXInternal.CSSProperties
 }
 export type NodeProps =
