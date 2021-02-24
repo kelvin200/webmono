@@ -16,6 +16,9 @@ export const layersDefault = () => (
         ],
         type: 'IMG',
         url: '/assets/mountain.png',
+        style: {
+          bottom: -135,
+        },
       },
       {
         passiveMovements: [
@@ -25,6 +28,9 @@ export const layersDefault = () => (
         ],
         type: 'IMG',
         url: '/assets/mountain2.png',
+        style: {
+          bottom: -40,
+        },
       },
     ]}
   />

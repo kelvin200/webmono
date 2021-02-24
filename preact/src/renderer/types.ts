@@ -1,9 +1,11 @@
-export interface GridProps {
+import { JSXInternal } from 'preact/src/jsx'
+
+export interface GridProps extends NodeBase {
   type: 'GRID'
   childNodes: NodeProps[]
 }
 
-export interface ImageProps {
+export interface ImageProps extends NodeBase {
   type: 'IMG'
   url: string
 }
@@ -22,6 +24,7 @@ type LayerConfig = NodeProps & {
   passiveMovements?: MovementConfig[]
   activeMovements?: MovementConfig[]
   opacity?: number | OpacityConfig
+  style?: JSXInternal.CSSProperties
 }
 
 export interface LayersProps extends NodeBase {
@@ -50,6 +53,7 @@ export interface NodeBase {
   type: unknown
   width?: number
   height?: number
+  style?: JSXInternal.CSSProperties
 }
 export type NodeProps =
   | (NodeBase & {

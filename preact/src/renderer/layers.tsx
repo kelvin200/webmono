@@ -20,7 +20,7 @@ const moveit = [
   }
 
   50% {
-    transform: translateX(-10%);
+    transform: translateX(-18%);
   }
 `,
   keyframes`
@@ -29,7 +29,7 @@ from, to {
 }
 
 50% {
-  transform: translateX(40%);
+  transform: translateX(5%);
 }
 `,
 ]
@@ -49,8 +49,8 @@ export const NodeLayers = ({ childNodes, width, height }: LayersProps) => {
         <div
           className={classes.item}
           style={{
-            animation: `${moveit[i]} 30s linear infinite`,
-            bottom: 0,
+            ...node.style,
+            animation: `${moveit[i]} 5s linear infinite`,
           }}
         >
           <RenderNode {...node} />
