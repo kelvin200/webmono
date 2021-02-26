@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'preact/hooks'
-import { addUrl, StoreContext } from '../store'
+import { addUrl, StoreContext } from '../../store'
 import { WebcProps } from './types'
 
 export const NodeWebc = ({ name, url }: WebcProps) => {

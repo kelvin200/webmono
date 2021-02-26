@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { h } from 'preact'
 import { useReducer } from 'preact/hooks'
 import { Link, LinkProps, Redirect, Route, Switch, useRoute } from 'wouter-preact'
-import { Page, Page2 } from './components'
+import { Page, Page2 } from './component'
 import { DEFAULT_STATE, RootReducer, StoreContext } from './store'
 
 setup(h)

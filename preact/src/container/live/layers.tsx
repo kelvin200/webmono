@@ -14,13 +14,14 @@ const useStyles = () => ({
 })
 
 const moveit = [
+  '',
   keyframes`
   from, to {
-    transform: translateX(-20%);
+    transform: translateX(-100px);
   }
 
   50% {
-    transform: translateX(-18%);
+    transform: translateX(-50px);
   }
 `,
   keyframes`
@@ -29,7 +30,7 @@ from, to {
 }
 
 50% {
-  transform: translateX(5%);
+  transform: translateX(100px);
 }
 `,
 ]
@@ -43,8 +44,8 @@ export const NodeLayers = ({ childNodes, style }: LayersProps) => {
         <div
           className={classes.item}
           style={{
-            ...node.style,
             animation: `${moveit[i]} 5s linear infinite`,
+            ...node.style,
           }}
         >
           <RenderNode {...node} />

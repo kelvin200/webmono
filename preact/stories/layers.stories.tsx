@@ -1,4 +1,4 @@
-import { NodeLayers } from '../src/renderer/layers'
+import { NodeLayers } from '../src/container/live/layers'
 
 export default { title: 'Layers' }
 
@@ -17,9 +17,34 @@ export const layersDefault = () => (
           },
         ],
         type: 'IMG',
-        url: '/assets/mountain.png',
+        url: '/assets/sky.jpg',
         style: {
-          bottom: -135,
+          bottom: 0,
+          animation: 'none',
+        },
+      },
+      {
+        passiveMovements: [
+          {
+            direction: 'L',
+          },
+        ],
+        type: 'IMG',
+        url: '/assets/mountain3.png',
+        style: {
+          bottom: -10,
+        },
+      },
+      {
+        passiveMovements: [
+          {
+            direction: 'L',
+          },
+        ],
+        type: 'IMG',
+        url: '/assets/mountain1.png',
+        style: {
+          bottom: -10,
         },
       },
       {

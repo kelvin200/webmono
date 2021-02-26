@@ -1,5 +1,5 @@
-import { NodeProps } from 'src/renderer/types'
-import { RenderNode } from '../renderer/node'
+import { NodeProps } from '../container/live/types'
+import { RenderNode } from '../container/live/node'
 
 const nodeconfig: NodeProps = {
   childNodes: [
