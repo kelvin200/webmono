@@ -1,9 +1,9 @@
 const path = require('path')
-const zopfli = require('@gfx/zopfli')
-const CompressionPlugin = require('compression-webpack-plugin')
+// const zopfli = require('@gfx/zopfli')
+// const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
-  // mode: 'development',
+  mode: 'development',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -16,15 +16,23 @@ module.exports = {
   resolveLoader: {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
-  // devtool: 'inline-source-map',
-  // devtool: false,
-  // plugins: [new webpack.SourceMapDevToolPlugin({})],
+  devtool: 'inline-source-map',
+  // plugins: [
+  //   new CompressionPlugin({
+  //     compressionOptions: {
+  //       numiterations: 15,
+  //     },
+  //     algorithm(input, compressionOptions, callback) {
+  //       return zopfli.gzip(input, compressionOptions, callback)
+  //     },
+  //   }),
+  // ],
   entry: {
     // text: './src/webc/text.tsx',
     // markdown: './src/webc/markdown.tsx',
-    'redux-hooks': './src/webc/redux-hooks.tsx',
-    'redux-rxjs': './src/webc/redux-rxjs.tsx',
-    'reactive-rxjs': './src/webc/reactive-rxjs.tsx',
+    // 'redux-hooks': './src/webc/redux-hooks.tsx',
+    // 'redux-rxjs': './src/webc/redux-rxjs.tsx',
+    // 'reactive-rxjs': './src/webc/reactive-rxjs.tsx',
     // 'reactive-kefir': './src/webc/reactive-kefir.tsx',
     // 'redux-kefir': './src/webc/redux-kefir.tsx',
     // text_s: {
@@ -52,16 +60,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
-  plugins: [
-    new CompressionPlugin({
-      compressionOptions: {
-        numiterations: 15,
-      },
-      algorithm(input, compressionOptions, callback) {
-        return zopfli.gzip(input, compressionOptions, callback)
-      },
-    }),
-  ],
 }

@@ -15,23 +15,31 @@ const compiler = webpack(config)
 
 const webpackDevMiddleware = require('webpack-dev-middleware')
 
-const indexFile = path.resolve(__dirname, './public/index.html')
+const templateFile = path.resolve(__dirname, './template.html')
 let htmlTemplate = ''
 try {
-  htmlTemplate = fs.readFileSync(indexFile, 'utf8')
+  htmlTemplate = fs.readFileSync(templateFile, 'utf8')
 } catch (err) {
   console.error('Something went wrong:', err)
 }
 
 app.use(
   webpackDevMiddleware(compiler, {
+    noInfo: true,
     publicPath: config.output.publicPath,
   }),
 )
+
+// app.use(express.static(path.resolve(__dirname, './dist')))
+
+app.use(express.static('./public'))
+
 const PORT = 8080
 
 // on each request, render and return a component:
-app.get('/', (req, res) => {
+app.get('/*', (req, res, next) => {
+  if (req.originalUrl.startsWith('/asset')) return next()
+
   const html = render(
     <Router hook={staticLocationHook(req.path)}>
       <App />
@@ -45,10 +53,6 @@ app.get('/', (req, res) => {
   return res.send(htmlTemplate.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
 })
 
-// app.use(express.static(path.resolve(__dirname, './dist')))
-
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
-
-app.use(express.static('./public/assets'))

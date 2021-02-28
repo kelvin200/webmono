@@ -50,7 +50,7 @@ export interface NavProps extends NodeBase {
   childNodes: NodeProps[]
 }
 export interface NodeBase {
-  type: unknown
+  type?: unknown
   style?: JSXInternal.CSSProperties
 }
 export type NodeProps =
