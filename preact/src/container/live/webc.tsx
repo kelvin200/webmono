@@ -1,14 +1,11 @@
-import { useContext, useEffect } from 'preact/hooks'
-import { addUrl, StoreContext } from '../../store'
+import { useEffect } from 'preact/hooks'
+import { scriptUrl$ } from '../../stream/scriptUrl'
 import { WebcProps } from './types'
 
 export const NodeWebc = ({ name, url }: WebcProps) => {
-  const store = useContext(StoreContext)
-  const dispatch = store.dispatch
-
   useEffect(() => {
-    dispatch(addUrl(url))
-  }, [dispatch, url])
+    scriptUrl$.next([url])
+  }, [url])
 
   const Tag = name
 

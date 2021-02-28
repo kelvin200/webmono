@@ -7,7 +7,7 @@
     "lib": ["ESNext", "DOM"],
     "allowJs": true,
     "rootDir": "../",
-    "baseUrl": "./",
+    // "baseUrl": "./",
     "outDir": "./dist",
     "removeComments": true,
     "isolatedModules": true,
