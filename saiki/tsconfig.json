@@ -7,7 +7,7 @@
     "lib": ["ESNext", "DOM"],
     "allowJs": true,
     "rootDir": "../",
-    // "baseUrl": "./",
+    "baseUrl": "./",
     "outDir": "./dist",
     "removeComments": true,
     "isolatedModules": true,
@@ -19,8 +19,11 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["../node_modules/@types"]
+    "typeRoots": ["../node_modules/@types"],
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
-  "include": ["./src", "./stories", "./.storybook/*.*"],
-  "exclude": ["./dist", "./webpack.config.js"]
+  "include": ["./src"],
+  "exclude": ["./dist", "./stories", "./.storybook", "./webpack.config.js"]
 }

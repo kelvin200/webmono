@@ -1,5 +1,5 @@
 const path = require('path')
-// const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 // const zopfli = require('@gfx/zopfli')
 // const CompressionPlugin = require('compression-webpack-plugin')
 
@@ -13,7 +13,7 @@ module.exports = {
       'react-dom': 'preact/compat',
     },
     modules: [path.resolve(__dirname, '../node_modules')],
-    // plugins: [new TsconfigPathsPlugin()],
+    plugins: [new TsconfigPathsPlugin()],
   },
   resolveLoader: {
     modules: [path.resolve(__dirname, '../node_modules')],

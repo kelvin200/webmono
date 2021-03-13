@@ -1,8 +1,16 @@
-# A web project for everything
+# Saiki-kun
+
+Saiki-kun is a psychic that could do anything. He tries to avoid getting attention.
+
+This project is to create a powerful web builder where there is no limit.
 
 ## Purpose
 
-- Business
+A web project for everything.
+
+## How it works
+
+Input a config, output a website.
 
 ## Tech objectives
 
