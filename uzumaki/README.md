@@ -2,9 +2,7 @@
 
 ## Purpose
 
-- Combine all tech learnt
-- Showcase/Portfolio
-- Side business
+- Business
 
 ## Tech objectives
 

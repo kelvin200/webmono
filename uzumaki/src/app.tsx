@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { Route, Switch } from 'wouter-preact'
 import { HomePage } from './container/home'
 import { NavBar } from './container/navbar'
-import { useSubscription } from './hook/subscription'
+import { useSubscription } from '../../kami/hook/subscription'
 import { scriptUrl$ } from './stream/scriptUrl'
 
 setup(h)
