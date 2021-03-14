@@ -6,6 +6,7 @@ import { Router } from 'wouter-preact'
 import staticLocationHook from 'wouter-preact/static-location'
 import { App } from './src/app'
 import encrypt from '@kami/crypto/encrypt'
+import { config as clientConfig } from './sample/artificialturf'
 
 // basic HTTP server via express:
 const app = express()
@@ -35,8 +36,6 @@ app.use(
 app.use(express.static('./public'))
 
 const PORT = 8080
-
-const clientConfig = { myobj: 'vlah' }
 
 // on each request, render and return a component:
 app.get('/*', (req, res, next) => {

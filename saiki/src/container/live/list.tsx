@@ -7,7 +7,7 @@ const useStyles = () => ({
   item: css({}),
 })
 
-export const NodeList = ({ childNodes, direction }: ListProps) => {
+export const NodeList = ({ content: childNodes, direction }: ListProps) => {
   const classes = useStyles()
   return (
     <div className={classes.container}>

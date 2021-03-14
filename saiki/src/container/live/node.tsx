@@ -26,7 +26,7 @@ export const RenderNode = (props: NodeProps) => {
     default:
       return (
         <>
-          {props.childNodes.map(n => (
+          {props.content.map(n => (
             <RenderNode {...n} />
           ))}
         </>

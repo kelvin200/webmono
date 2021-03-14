@@ -2,7 +2,7 @@ import { NodeProps } from '../container/live/types'
 import { RenderNode } from '../container/live/node'
 
 const nodeconfig: NodeProps = {
-  childNodes: [
+  content: [
     // {
     //   type: 'WEBC',
     //   name: 'preact-sample-css',

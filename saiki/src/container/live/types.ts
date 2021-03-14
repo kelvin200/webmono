@@ -2,7 +2,7 @@ import { JSXInternal } from 'preact/src/jsx'
 
 export interface GridProps extends NodeBase {
   type: 'GRID'
-  childNodes: NodeProps[]
+  content: NodeProps[]
 }
 
 export interface ImageProps extends NodeBase {
@@ -29,7 +29,7 @@ type LayerConfig = NodeProps & {
 
 export interface LayersProps extends NodeBase {
   type: 'LAYERS'
-  childNodes: LayerConfig[]
+  content: LayerConfig[]
 }
 export interface MarkdownProps extends NodeBase {
   type: 'MD'
@@ -42,12 +42,12 @@ export interface WebcProps extends NodeBase {
 }
 export interface ListProps extends NodeBase {
   type: 'LIST'
-  childNodes: NodeProps[]
+  content: NodeProps[]
   direction?: string
 }
 export interface NavProps extends NodeBase {
   type: 'NAV'
-  childNodes: NodeProps[]
+  content: NodeProps[]
 }
 export interface NodeBase {
   type?: unknown
@@ -56,7 +56,8 @@ export interface NodeBase {
 export type NodeProps =
   | (NodeBase & {
       type?: never
-      childNodes: NodeProps[]
+      direction?: 'row' | 'column'
+      content: NodeProps[]
     })
   | GridProps
   | LayersProps

@@ -35,7 +35,7 @@ from, to {
 `,
 ]
 
-export const NodeLayers = ({ childNodes, style }: LayersProps) => {
+export const NodeLayers = ({ content: childNodes, style }: LayersProps) => {
   const classes = useStyles()
 
   return (

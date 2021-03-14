@@ -3,8 +3,8 @@ import { h } from 'preact'
 import { Route, Switch } from 'wouter-preact'
 import { HomePage } from './container/home'
 import { NavBar } from './container/navbar'
-import { useSubscription } from '../../kami/hook/subscription'
-import { scriptUrl$ } from './stream/scriptUrl'
+// import { useSubscription } from '../../kami/hook/subscription'
+// import { scriptUrl$ } from './stream/scriptUrl'
 
 setup(h)
 
@@ -13,17 +13,17 @@ interface Props {
 }
 
 export const App = ({ config }: Props) => {
-  const scriptUrls = useSubscription(scriptUrl$)
+  // const scriptUrls = useSubscription(scriptUrl$)
 
   if (!config) return null
 
   return (
     <div>
-      <div>
+      {/* <div>
         {scriptUrls?.map(u => (
           <script key={u} src={u} type="text/javascript" />
         ))}
-      </div>
+      </div> */}
 
       <NavBar />
 
