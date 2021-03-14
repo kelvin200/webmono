@@ -1,29 +1,14 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "target": "esnext",
-    "module": "commonjs",
     "lib": ["ESNext", "DOM"],
-    "allowJs": true,
-    "rootDir": "../",
     "baseUrl": "./",
-    "outDir": "./dist",
-    "removeComments": true,
-    "isolatedModules": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["../node_modules/@types"],
     "paths": {
-      "src/*": ["./src/*"]
+      "@kami/*": ["../kami/*"]
     }
   },
-  "include": ["./src"],
-  "exclude": ["./dist", "./stories", "./.storybook", "./webpack.config.js"]
+  "include": ["./"],
+  "exclude": ["./public", "./stories", "./.storybook", "./webpack.config.js"]
 }

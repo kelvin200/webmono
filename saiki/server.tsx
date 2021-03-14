@@ -5,6 +5,7 @@ import render from 'preact-render-to-string'
 import { Router } from 'wouter-preact'
 import staticLocationHook from 'wouter-preact/static-location'
 import { App } from './src/app'
+import encrypt from '@kami/crypto/encrypt'
 
 // basic HTTP server via express:
 const app = express()
@@ -35,13 +36,15 @@ app.use(express.static('./public'))
 
 const PORT = 8080
 
+const clientConfig = { myobj: 'vlah' }
+
 // on each request, render and return a component:
 app.get('/*', (req, res, next) => {
   if (req.originalUrl.startsWith('/asset')) return next()
 
   const html = render(
     <Router hook={staticLocationHook(req.path)}>
-      <App />
+      <App config={clientConfig} />
     </Router>,
   )
   // TODO: SEO for html content
@@ -49,7 +52,13 @@ app.get('/*', (req, res, next) => {
     return res.status(500).send('Oops, better luck next time!')
   }
 
-  return res.send(htmlTemplate.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
+  const na = encrypt(clientConfig)
+
+  return res.send(
+    htmlTemplate
+      .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+      .replace('<div id="na"></div>', `<div id="na">${na}</div>`),
+  )
 })
 
 app.listen(PORT, () => {

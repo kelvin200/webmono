@@ -1,4 +1,4 @@
-import { NodeLayers } from 'src/container/live/layers'
+import { NodeLayers } from '../src/container/live/layers'
 
 export default { title: 'Layers' }
 

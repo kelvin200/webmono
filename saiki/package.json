@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "ts-node-dev ./server.tsx",
+    "start": "ts-node-dev -r tsconfig-paths/register ./server.tsx",
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
     "clean": "rimraf ./dist",

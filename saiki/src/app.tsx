@@ -8,8 +8,15 @@ import { scriptUrl$ } from './stream/scriptUrl'
 
 setup(h)
 
-export const App = () => {
+interface Props {
+  config: {}
+}
+
+export const App = ({ config }: Props) => {
   const scriptUrls = useSubscription(scriptUrl$)
+
+  if (!config) return null
+
   return (
     <div>
       <div>

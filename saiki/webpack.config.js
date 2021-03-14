@@ -1,10 +1,13 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-// const zopfli = require('@gfx/zopfli')
-// const CompressionPlugin = require('compression-webpack-plugin')
+const zopfli = require('@gfx/zopfli')
+const CompressionPlugin = require('compression-webpack-plugin')
+
+// const MODE = 'production'
+const MODE = 'development'
 
 module.exports = {
-  mode: 'development',
+  mode: MODE,
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -14,22 +17,27 @@ module.exports = {
     },
     modules: [path.resolve(__dirname, '../node_modules')],
     plugins: [new TsconfigPathsPlugin()],
+    // fallback: {
+    //   crypto: false,
+    // },
   },
   resolveLoader: {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
-  devtool: 'inline-source-map',
-  // plugins: [
-  //   new TsconfigPathsPlugin(),
-  //   new CompressionPlugin({
-  //     compressionOptions: {
-  //       numiterations: 15,
-  //     },
-  //     algorithm(input, compressionOptions, callback) {
-  //       return zopfli.gzip(input, compressionOptions, callback)
-  //     },
-  //   }),
-  // ],
+  devtool: MODE === 'development' ? 'inline-source-map' : undefined,
+  plugins:
+    MODE === 'production'
+      ? [
+          new CompressionPlugin({
+            compressionOptions: {
+              numiterations: 15,
+            },
+            algorithm(input, compressionOptions, callback) {
+              return zopfli.gzip(input, compressionOptions, callback)
+            },
+          }),
+        ]
+      : [],
   entry: {
     // text: './src/webc/text.tsx',
     // markdown: './src/webc/markdown.tsx',
@@ -46,10 +54,14 @@ module.exports = {
     //   import: './src/webc/text2.webc.tsx',
     //   dependOn: 'vendors',
     // },
+    // vendors: ['preact', 'goober', 'wouter-preact'],
+    // vendorsA: ['preact'],
+    // vendorsB: ['goober'],
+    // vendorsC: ['wouter-preact'],
     // vendors: ['preact', 'goober', 'wouter-preact', 'preact-custom-element', 'markdown-to-jsx'],
-    bundle: './index.tsx',
+    bundle: './client.tsx',
     // bundle: {
-    //   import: './index.tsx',
+    //   import: './client.tsx',
     //   dependOn: 'vendors',
     // },
   },
