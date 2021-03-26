@@ -19,6 +19,8 @@ export const RenderNode = (props: NodeProps) => {
       return <NodeMarkdown {...props} />
     case 'NAV':
       return <NodeNav {...props} />
+    case 'NAVBAR':
+      return <p>navbar</p>
     case 'WEBC':
       return <NodeWebc {...props} />
     case 'IMG':
@@ -26,7 +28,7 @@ export const RenderNode = (props: NodeProps) => {
     default:
       return (
         <>
-          {props.content.map(n => (
+          {props.content?.map(n => (
             <RenderNode {...n} />
           ))}
         </>

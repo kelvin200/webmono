@@ -117,8 +117,38 @@ const home = [
   '@LINK:/contact-us/|${Contact us}',
 ]
 
-const config = {
+export const config = {
   node: {
+    root: {
+      type: 'GRID',
+      content: {
+        '0,0': '@N:sidebar',
+        '0,1': '@N:navbar',
+        '1,1': '@N:rootContent',
+      },
+    },
+    sidebar: {
+      type: 'MD',
+      content: 'dddddd',
+    },
+    navbar: {
+      type: 'NAVBAR',
+      content: navbar,
+      // direction: 'row',
+      // contentSrc: 'content-navbar',
+      // itemTemplate: '@LINK:$.url|$.text',
+    },
+    rootContent: {
+      operator: 'lookup',
+      input: [
+        '$.route',
+        {
+          '/': '@N:home',
+          '/about': '@N:about',
+        },
+      ],
+    },
+
     homeCarousel: {
       type: 'CAROUSEL',
       contentSrc: 'content-1',
@@ -154,21 +184,6 @@ const config = {
     },
     home: {
       contentSrc: 'content-home',
-    },
-    root: {
-      type: 'NAVIGATION',
-      direction: 'row',
-      route: {
-        '/': '@N:home',
-        '/about': '@N:about',
-      },
-      content: ['@N:navbar', '$.content', '@N:footter'],
-    },
-    navbar: {
-      type: 'LIST',
-      direction: 'row',
-      contentSrc: 'content-navbar',
-      itemTemplate: '@LINK:$.url|$.text',
     },
   },
   root: '@N:root',

@@ -2,7 +2,11 @@ import { JSXInternal } from 'preact/src/jsx'
 
 export interface GridProps extends NodeBase {
   type: 'GRID'
-  content: NodeProps[]
+  content: Record<string, NodeProps>
+}
+export interface GridPropsXXX extends Omit<GridProps, 'content'> {
+  type: 'GRID'
+  content: Record<string, NodePropsXXX | string>
 }
 
 export interface ImageProps extends NodeBase {
@@ -42,12 +46,24 @@ export interface WebcProps extends NodeBase {
 }
 export interface ListProps extends NodeBase {
   type: 'LIST'
-  content: NodeProps[]
+  content?: NodeProps[]
+  // contentSrc?: string
+  // itemTemplate?: string
   direction?: string
+}
+export interface ListPropsXXX extends Omit<ListProps, 'content'> {
+  content?: NodePropsXXX[]
 }
 export interface NavProps extends NodeBase {
   type: 'NAV'
   content: NodeProps[]
+}
+export interface NavBarProps extends NodeBase {
+  type: 'NAVBAR'
+  content: { url: string; text: string }[]
+}
+export interface NavPropsXXX extends Omit<NavProps, 'content'> {
+  content: NodePropsXXX[]
 }
 export interface NodeBase {
   type?: unknown
@@ -65,4 +81,20 @@ export type NodeProps =
   | WebcProps
   | ListProps
   | NavProps
+  | NavBarProps
+  | ImageProps
+
+export type NodePropsXXX =
+  | (NodeBase & {
+      type?: never
+      direction?: 'row' | 'column'
+      content: NodePropsXXX[]
+    })
+  | GridPropsXXX
+  | LayersProps
+  | MarkdownProps
+  | WebcProps
+  | ListPropsXXX
+  | NavPropsXXX
+  | NavBarProps
   | ImageProps

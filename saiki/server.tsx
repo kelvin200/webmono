@@ -1,12 +1,9 @@
 import express from 'express'
-import fs from 'fs'
-import path from 'path'
 import render from 'preact-render-to-string'
 import { Router } from 'wouter-preact'
 import staticLocationHook from 'wouter-preact/static-location'
-import { App } from './src/app'
-import encrypt from '@kami/crypto/encrypt'
 import { config as clientConfig } from './sample/artificialturf'
+import { App } from './src/app'
 
 // basic HTTP server via express:
 const app = express()
@@ -17,13 +14,28 @@ const compiler = webpack(config)
 
 const webpackDevMiddleware = require('webpack-dev-middleware')
 
-const templateFile = path.resolve(__dirname, './template.html')
-let htmlTemplate = ''
-try {
-  htmlTemplate = fs.readFileSync(templateFile, 'utf8')
-} catch (err) {
-  console.error('Something went wrong:', err)
-}
+const htmlTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>My site</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link rel="shortcut icon" href="/asset/favicon.ico" />
+    <link rel="apple-touch-icon" href="/asset/icon/apple-touch-icon.png" />
+    <script type="text/javascript" src="/keyweb-bundle.js"></script>
+    <!-- <script type="text/javascript" src="/keyweb-vendors.js"></script> -->
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>`
 
 app.use(
   webpackDevMiddleware(compiler, {
@@ -43,7 +55,7 @@ app.get('/*', (req, res, next) => {
 
   const html = render(
     <Router hook={staticLocationHook(req.path)}>
-      <App config={clientConfig} />
+      <App config={clientConfig as any} />
     </Router>,
   )
   // TODO: SEO for html content
@@ -51,13 +63,7 @@ app.get('/*', (req, res, next) => {
     return res.status(500).send('Oops, better luck next time!')
   }
 
-  const na = encrypt(clientConfig)
-
-  return res.send(
-    htmlTemplate
-      .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
-      .replace('<div id="na"></div>', `<div id="na">${na}</div>`),
-  )
+  return res.send(htmlTemplate.replace('<div id="root"></div>', `<div id="root">${html}</div>`))
 })
 
 app.listen(PORT, () => {

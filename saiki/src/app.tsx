@@ -1,21 +1,59 @@
 import { setup } from 'goober'
 import { h } from 'preact'
-import { Route, Switch } from 'wouter-preact'
-import { HomePage } from './container/home'
-import { NavBar } from './container/navbar'
-// import { useSubscription } from '../../kami/hook/subscription'
+import { useMemo } from 'preact/hooks'
+import { RenderNode } from './container/live/node'
+import { NodeProps, NodePropsXXX } from './container/live/types'
 // import { scriptUrl$ } from './stream/scriptUrl'
 
 setup(h)
 
 interface Props {
-  config: {}
+  config?: {
+    node?: Record<string, NodePropsXXX>
+    root?: string
+  }
+}
+const reg = /^@(.*?):(.*?)$/
+
+const hydrateNode = (node: NodePropsXXX, nodes: any): NodeProps | undefined => {
+  switch (node.type) {
+    case 'GRID': {
+      return {
+        ...node,
+        content: Object.fromEntries(
+          Object.entries(node.content)
+            .map(x => [
+              x[0],
+              typeof x[1] === 'string' ? hydrateConfig(nodes, x[1]) : hydrateNode(x[1], nodes),
+            ])
+            .filter(x => !!x[1]),
+        ) as Record<string, NodeProps>,
+      }
+    }
+  }
+
+  return node as any
 }
 
-export const App = ({ config }: Props) => {
-  // const scriptUrls = useSubscription(scriptUrl$)
+const hydrateConfig = (node: Record<string, any>, root: string): NodeProps | undefined => {
+  const m = root.match(reg)
 
-  if (!config) return null
+  if (!m) return undefined
+
+  switch (m[1]) {
+    case 'N':
+      if (!node[m[2]]) return undefined
+      return hydrateNode(node[m[2]], node)
+  }
+
+  return undefined
+}
+
+export const App = ({ config: { node, root } = {} }: Props) => {
+  const ccc = useMemo(() => (node && root ? hydrateConfig(node, root) : undefined), [node, root])
+
+  console.log(JSON.stringify(ccc, null, 2))
+  if (!ccc) return null
 
   return (
     <div>
@@ -24,19 +62,7 @@ export const App = ({ config }: Props) => {
           <script key={u} src={u} type="text/javascript" />
         ))}
       </div> */}
-
-      <NavBar />
-
-      <main>
-        <Switch>
-          <Route path="/">
-            <HomePage />
-          </Route>
-          <Route path="/about">
-            <div>blah</div>
-          </Route>
-        </Switch>
-      </main>
+      <RenderNode {...ccc} />
     </div>
   )
 }
