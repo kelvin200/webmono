@@ -121,6 +121,11 @@ export const config = {
   node: {
     root: {
       type: 'GRID',
+      style: {
+        // gridTemplateColumns: '40px 50px auto 50px 40px',
+        // gridTemplateRows: '25% 100px auto',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+      },
       content: {
         '0,0': '@N:sidebar',
         '0,1': '@N:navbar',
@@ -130,10 +135,22 @@ export const config = {
     sidebar: {
       type: 'MD',
       content: 'dddddd',
+      style: {
+        gridColumnStart: 1,
+        gridColumnEnd: 3,
+        gridRowStart: 1,
+        gridRowEnd: 'last-line',
+      },
     },
     navbar: {
       type: 'NAVBAR',
       content: navbar,
+      style: {
+        gridColumnStart: 3,
+        gridColumnEnd: 'end',
+        gridRowStart: 1,
+        gridRowEnd: 2,
+      },
       // direction: 'row',
       // contentSrc: 'content-navbar',
       // itemTemplate: '@LINK:$.url|$.text',
@@ -147,6 +164,12 @@ export const config = {
           '/about': '@N:about',
         },
       ],
+      style: {
+        gridColumnStart: 3,
+        gridColumnEnd: 'end',
+        gridRowStart: 2,
+        gridRowEnd: 'last-line',
+      },
     },
 
     homeCarousel: {

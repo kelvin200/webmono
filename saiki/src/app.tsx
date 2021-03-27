@@ -56,7 +56,7 @@ export const App = ({ config: { node, root } = {} }: Props) => {
   if (!ccc) return null
 
   return (
-    <div>
+    <div style={{ width: '100%', height: '100%' }}>
       {/* <div>
         {scriptUrls?.map(u => (
           <script key={u} src={u} type="text/javascript" />
