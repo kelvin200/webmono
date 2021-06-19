@@ -3,8 +3,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const zopfli = require('@gfx/zopfli')
 const CompressionPlugin = require('compression-webpack-plugin')
 
-// const MODE = 'production'
-const MODE = 'development'
+const MODE = 'production'
+// const MODE = 'development'
 
 module.exports = {
   mode: MODE,
@@ -25,19 +25,19 @@ module.exports = {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
   devtool: MODE === 'development' ? 'inline-source-map' : undefined,
-  plugins:
-    MODE === 'production'
-      ? [
-          new CompressionPlugin({
-            compressionOptions: {
-              numiterations: 15,
-            },
-            algorithm(input, compressionOptions, callback) {
-              return zopfli.gzip(input, compressionOptions, callback)
-            },
-          }),
-        ]
-      : [],
+  // plugins:
+  //   MODE === 'production'
+  //     ? [
+  //         new CompressionPlugin({
+  //           compressionOptions: {
+  //             numiterations: 15,
+  //           },
+  //           algorithm(input, compressionOptions, callback) {
+  //             return zopfli.gzip(input, compressionOptions, callback)
+  //           },
+  //         }),
+  //       ]
+  //     : [],
   entry: {
     // text: './src/webc/text.tsx',
     // markdown: './src/webc/markdown.tsx',

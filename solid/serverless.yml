@@ -1,0 +1,33 @@
+service: my-server
+
+package:
+  individually: true
+
+plugins:
+  - ../node_modules/serverless-offline
+  - ../node_modules/serverless-prune-plugin
+  - ../node_modules/serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.server.js
+    # concurrency: 1
+    # serializedCompile: true
+    includeModules: true
+    # If you use Yarn instead of NPM in your environment, uncomment the following line.
+    packager: yarn
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: ap-southeast-2
+
+functions:
+  app:
+    name: web-server
+    handler: server.handler
+    events:
+      - http:
+          path: /
+          method: ANY

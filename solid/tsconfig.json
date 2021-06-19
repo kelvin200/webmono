@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": ["./"],
+  "exclude": [
+    "./public",
+    "./stories",
+    "./.storybook",
+    "webpack.client.dev.js",
+    "webpack.client.prod.js"
+  ]
+}
