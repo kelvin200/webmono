@@ -1,9 +1,8 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [path.resolve(__dirname, '../node_modules')],
@@ -12,25 +11,9 @@ module.exports = {
   resolveLoader: {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
-  optimization: {
-    // We no not want to minimize our code.
-    minimize: false,
-  },
-  performance: {
-    // Turn off size warnings for entry points
-    hints: false,
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    port: 3000,
-    open: true,
-    hot: true,
-  },
-  plugins: [new HtmlWebpackPlugin()],
-  devtool: 'inline-source-map',
-  entry: './client.tsx',
+  entry: { bundle: './client.tsx' },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -47,11 +30,6 @@ module.exports = {
         options: {
           babelrc: false,
           presets: ['@babel/preset-env', 'solid', '@babel/preset-typescript'],
-          // presets: [
-          //   '@babel/preset-env',
-          //   ['solid', { moduleName: '@lume/element' }],
-          //   '@babel/preset-typescript',
-          // ],
           cacheDirectory: true,
           cacheCompression: false,
           compact: false,
