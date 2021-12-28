@@ -1,11 +1,17 @@
-import { createSignal } from 'solid-js'
+import { createEffect, createSignal } from 'solid-js'
 import { For } from 'solid-js/web'
 
-const a = Array.from({ length: 2000 }, (v, i) => i)
-
-export const List = () => {
-  const [data, setData] = createSignal(a)
+interface Props {
+  length?: number
+}
+export const List = (props: Props) => {
+  const [data, setData] = createSignal<number[]>([])
   const fn = () => setData(data().filter((_, x) => x % 7 > 0))
+
+  createEffect(() => {
+    console.log('Bllla', props.length)
+    setData(Array.from({ length: (props.length || 5) * 10 }, (v, i) => i))
+  })
 
   return (
     <div>

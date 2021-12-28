@@ -11,10 +11,13 @@ module.exports = {
   resolveLoader: {
     modules: [path.resolve(__dirname, '../node_modules')],
   },
-  entry: { bundle: './client.tsx' },
+  entry: {
+    solid: './src/lume.tsx',
+    todo: './src/mytodo.tsx',
+  },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [

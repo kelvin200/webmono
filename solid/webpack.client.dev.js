@@ -28,7 +28,10 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin()],
   devtool: 'inline-source-map',
-  entry: './client.tsx',
+  entry: {
+    lll: './src/lume.tsx',
+  },
+  // entry: './client.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

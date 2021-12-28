@@ -4,7 +4,8 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     // "jsxImportSource": "@lume/element",
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "experimentalDecorators": true
   },
   "include": ["./"],
   "exclude": [
